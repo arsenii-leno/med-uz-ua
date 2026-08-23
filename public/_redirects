@@ -19,3 +19,4 @@
 /feed*                  /                    301
 /wp-content/*           /                    301
 /wp-includes/*          /                    301
+/sitemap.xml    /sitemap-index.xml    301
