@@ -1,0 +1,21 @@
+# Legacy Pages & Aliases
+/contact                /contacts/           301
+/contact/               /contacts/           301
+/pro-nas                /about/              301
+/pro-nas/               /about/              301
+/poslugy                /services/           301
+/poslugy/               /services/           301
+
+# Legacy WordPress Articles -> Relevant Hubs
+/tablicja-dlja-perevirki-zoru*                                     /services/           301
+/daltonizm-abo-kolorova-slipota-shcho-tse-take*                    /services/           301
+/chomu-potribno-nosyty-sontsezakhysni-okuliary-ta-iaki-pravylno-prydbaty*   /shop/      301
+/osnovni-rekomendatsii-shchodo-pravylnoho-korystuvannia-kontaktnymy-linzamy* /shop/     301
+
+# Legacy WordPress Taxonomy & Feeds -> Homepage
+/tag/*                  /                    301
+/category/*             /                    301
+/author/*               /                    301
+/feed*                  /                    301
+/wp-content/*           /                    301
+/wp-includes/*          /                    301
