@@ -69,7 +69,6 @@ if (hasOgTitle && hasOgDesc && hasOgImage && hasTwitterCard) {
   fail(`Відсутні обов'язкові мета-теги: ${[!hasOgTitle && 'og:title', !hasOgDesc && 'og:description', !hasOgImage && 'og:image', !hasTwitterCard && 'twitter:card'].filter(Boolean).join(", ")}`);
 }
 
-const ogMatches = headComponent.match(/content=["']([^"']*\.(?:webp|png|jpg|jpeg))["']/i);
 if (headComponent.includes(".webp") && headComponent.includes("og:image")) {
   warn("Увага: у og:image використовується .webp. Деякі месенджери (Viber/старий WhatsApp) краще відображають PNG/JPG.");
 } else {
@@ -86,7 +85,6 @@ if (headComponent.includes("viewport-fit=cover")) {
   warn("У meta viewport рекомендовано додати 'viewport-fit=cover'");
 }
 
-const cssFiles = ["src/styles/global.css", "src/styles/app.css"].map(readFile).filter(Boolean).join("\n");
 const allSrc = fs.readdirSync("src", { recursive: true }).filter(f => f.endsWith(".astro") || f.endsWith(".css")).map(f => readFile(path.join("src", f))).join("\n");
 
 if (allSrc.includes("safe-area-inset") || allSrc.includes("env(safe-area-inset-bottom)")) {

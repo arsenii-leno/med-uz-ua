@@ -376,6 +376,7 @@ const copy = {
   }
 
   class CartDrawerElement extends HTMLElement {
+    #liveElement: HTMLElement | null = null;
     #dialog: HTMLDialogElement | null = null;
     #itemsElement: HTMLUListElement | null = null;
     #emptyElement: HTMLElement | null = null;
@@ -384,8 +385,7 @@ const copy = {
     #subtotalElement: HTMLElement | null = null;
     #pricingNoteElement: HTMLElement | null = null;
     #badgeElement: HTMLElement | null = null;
-    #liveElement: HTMLElement | null = null;
-    #items: readonly CartItem[] = [];
+        #items: readonly CartItem[] = [];
     #catalog: ReadonlyMap<string, CartCatalogProduct> = new Map();
     #unsubscribers: Array<() => void> = [];
     #openingTrigger: HTMLButtonElement | null = null;
@@ -429,6 +429,7 @@ const copy = {
       this.#pricingNoteElement = pricingNoteElement;
       this.#badgeElement = badgeElement instanceof HTMLElement ? badgeElement : null;
       this.#liveElement = liveElement;
+      void this.#liveElement;
       this.#messages = messages;
       this.#catalog = createCartCatalogIndex(
         decodeCartCatalog(this.dataset.cartCatalog),

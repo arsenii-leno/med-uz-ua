@@ -161,7 +161,7 @@ const structuredData = {
     <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Schema.org Knowledge Graph -->
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <slot name="head" />
   </head>

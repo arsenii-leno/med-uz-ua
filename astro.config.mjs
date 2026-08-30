@@ -6,6 +6,9 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://med.uz.ua",
   output: "static",
+  build: {
+    inlineStylesheets: "always",
+  },
   adapter: cloudflare({
     imageService: "compile",
   }),
