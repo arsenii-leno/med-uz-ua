@@ -200,7 +200,6 @@ const localized = copy[locale];
     getConsentState,
     initializeGoogleConsentDefaults,
     setConsentPreferences,
-    shouldLoadGoogleScripts,
     synchronizeConsentStateFromStorage,
     trackPhoneClick,
     updateGoogleConsent,
@@ -264,8 +263,9 @@ const localized = copy[locale];
 
       if (this.#state !== null) {
         updateGoogleConsent(this.#state);
-        this.#loadGtmIfAllowed();
       }
+
+      this.#loadGtm();
 
       panel.hidden = this.#state !== null || !this.#loaderEnabled;
     }
@@ -341,7 +341,6 @@ const localized = copy[locale];
       updateGoogleConsent(this.#state);
       this.#clearRevokedStorage(previous, this.#state);
       this.#syncControls();
-      this.#loadGtmIfAllowed();
       if (this.#panel) {
         this.#panel.hidden = this.#state !== null || !this.#loaderEnabled;
       }
@@ -355,7 +354,6 @@ const localized = copy[locale];
       updateGoogleConsent(state);
       this.#clearRevokedStorage(previous, state);
       this.#syncControls();
-      this.#loadGtmIfAllowed();
       if (this.#status) {
         this.#status.textContent = "";
         requestAnimationFrame(() => {
@@ -405,11 +403,10 @@ const localized = copy[locale];
       this.#opener = null;
     }
 
-    #loadGtmIfAllowed(): void {
+    #loadGtm(): void {
       if (
         !this.#loaderEnabled ||
         this.#containerId.length === 0 ||
-        !shouldLoadGoogleScripts(this.#state) ||
         document.querySelector(
           'script[data-google-tag-manager-loader], script[src*="/gtm.js"]',
         ) !== null
