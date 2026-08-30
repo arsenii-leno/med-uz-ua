@@ -6,10 +6,15 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const rawContainerId = import.meta.env.PUBLIC_GTM_CONTAINER_ID;
+const rawContainerId = import.meta.env.PUBLIC_GTM_CONTAINER_ID ?? "GTM-K96GCCJ5";
 const containerId = /^GTM-[A-Z0-9]+$/.test(rawContainerId ?? "")
   ? rawContainerId
-  : "";
+  : "GTM-K96GCCJ5";
+
+const rawMeasurementPath = import.meta.env.PUBLIC_GTM_MEASUREMENT_PATH ?? "/7hda";
+const measurementPath = rawMeasurementPath.startsWith("/")
+  ? rawMeasurementPath
+  : `/${rawMeasurementPath}`;
 
 const copy = {
   uk: {
@@ -79,6 +84,7 @@ const localized = copy[locale];
 
 <analytics-consent
   data-container-id={containerId}
+  data-measurement-path={measurementPath}
   data-loader-enabled={containerId.length > 0 ? "true" : "false"}
 >
   <aside
@@ -218,6 +224,7 @@ const localized = copy[locale];
     #opener: HTMLButtonElement | null = null;
     #state: ConsentState | null = null;
     #containerId = "";
+    #measurementPath = "/7hda";
     #loaderEnabled = false;
 
     connectedCallback(): void {
@@ -242,7 +249,8 @@ const localized = copy[locale];
       this.#analyticsInput = analyticsInput;
       this.#advertisingInput = advertisingInput;
       this.#status = status;
-      this.#containerId = this.dataset.containerId ?? "";
+      this.#containerId = this.dataset.containerId ?? "GTM-K96GCCJ5";
+      this.#measurementPath = this.dataset.measurementPath ?? "/7hda";
       this.#loaderEnabled = this.dataset.loaderEnabled === "true";
 
       this.addEventListener("click", this.#handleClick);
@@ -403,7 +411,7 @@ const localized = copy[locale];
         this.#containerId.length === 0 ||
         !shouldLoadGoogleScripts(this.#state) ||
         document.querySelector(
-          'script[data-google-tag-manager-loader], script[src^="https://www.googletagmanager.com/gtm.js"]',
+          'script[data-google-tag-manager-loader], script[src*="/gtm.js"]',
         ) !== null
       ) {
         return;
@@ -417,7 +425,8 @@ const localized = copy[locale];
       const script = document.createElement("script");
       script.async = true;
       script.dataset.googleTagManagerLoader = "true";
-      script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(this.#containerId)}`;
+      const cleanPath = this.#measurementPath.replace(/\/+$/, "");
+      script.src = `${cleanPath}/gtm.js?id=${encodeURIComponent(this.#containerId)}`;
       document.head.append(script);
     }
   }

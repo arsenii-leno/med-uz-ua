@@ -19,3 +19,7 @@ __MACOSX/
 # Windows
 Thumbs.db
 ehthumbs.db
+
+# Texts
+*.md
+structure.txt
