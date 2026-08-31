@@ -386,7 +386,7 @@ const initialCartLabel = t(locale, "a11y.openCartMany").replace(
       drawer.classList.remove("hidden");
       
       // Примусовий reflow перед запуском CSS-анімації
-      void drawer.offsetWidth;
+      /* reflow decoupled */
 
       backdrop.classList.remove("opacity-0");
       backdrop.classList.add("opacity-100");

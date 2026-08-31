@@ -11,10 +11,8 @@ const containerId = /^GTM-[A-Z0-9]+$/.test(rawContainerId ?? "")
   ? rawContainerId
   : "GTM-K96GCCJ5";
 
-const rawMeasurementPath = import.meta.env.PUBLIC_GTM_MEASUREMENT_PATH ?? "https://www.googletagmanager.com";
-const measurementPath = rawMeasurementPath.startsWith("/")
-  ? rawMeasurementPath
-  : `/${rawMeasurementPath}`;
+const rawMeasurementPath = "https://www.googletagmanager.com";
+const measurementPath = "https://www.googletagmanager.com";
 
 const copy = {
   uk: {
