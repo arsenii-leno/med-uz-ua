@@ -11,7 +11,7 @@ const containerId = /^GTM-[A-Z0-9]+$/.test(rawContainerId ?? "")
   ? rawContainerId
   : "GTM-K96GCCJ5";
 
-const rawMeasurementPath = import.meta.env.PUBLIC_GTM_MEASUREMENT_PATH ?? "/7hda";
+const rawMeasurementPath = import.meta.env.PUBLIC_GTM_MEASUREMENT_PATH ?? "https://www.googletagmanager.com";
 const measurementPath = rawMeasurementPath.startsWith("/")
   ? rawMeasurementPath
   : `/${rawMeasurementPath}`;
@@ -223,7 +223,7 @@ const localized = copy[locale];
     #opener: HTMLButtonElement | null = null;
     #state: ConsentState | null = null;
     #containerId = "";
-    #measurementPath = "/7hda";
+    #measurementPath = "https://www.googletagmanager.com";
     #loaderEnabled = false;
 
     connectedCallback(): void {
@@ -249,7 +249,7 @@ const localized = copy[locale];
       this.#advertisingInput = advertisingInput;
       this.#status = status;
       this.#containerId = this.dataset.containerId ?? "GTM-K96GCCJ5";
-      this.#measurementPath = this.dataset.measurementPath ?? "/7hda";
+      this.#measurementPath = this.dataset.measurementPath || "https://www.googletagmanager.com";
       this.#loaderEnabled = this.dataset.loaderEnabled === "true";
 
       this.addEventListener("click", this.#handleClick);
@@ -265,7 +265,11 @@ const localized = copy[locale];
         updateGoogleConsent(this.#state);
       }
 
-      this.#loadGtm();
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(() => this.#loadGtm(), { timeout: 2500 });
+      } else {
+        setTimeout(() => this.#loadGtm(), 1500);
+      }
 
       panel.hidden = this.#state !== null || !this.#loaderEnabled;
     }
