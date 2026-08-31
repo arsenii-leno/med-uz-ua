@@ -15,14 +15,16 @@
 
 <!-- PLACEHOLDER 1: MAIN UI PREVIEW -->
 ### 🖥️ Production Interface
-![med.uz.ua Platform UI Preview](https://placehold.co/1200x600/0b0f19/3b82f6?text=Upload+Your+Main+Site+Screenshot+Here)
+<img width="1459" height="823" alt="image" src="https://github.com/user-attachments/assets/cc4edc0d-8c3f-4407-b3e8-c7425c9ef930" />
 *Clean, accessible, mobile-first patient interface optimized for instant appointment booking and clinical clarity.*
 
 <!-- PLACEHOLDER 2: LIGHTHOUSE & CONVERSION METRICS (2-Column Grid) -->
 ### ⚡ Core Web Vitals & Conversion Telemetry
-| 🚀 100/100 Google PageSpeed Score | 📊 GTM / GA4 Event Attribution |
+
+| 🚀 ~100/100 Google PageSpeed Audits | 📊 GTM / GA4 Telemetry Pipeline |
 | :---: | :---: |
-| ![PageSpeed 100/100 Audit](https://placehold.co/600x350/0b0f19/10b981?text=Lighthouse+100+CWV+Score) | ![Conversion Tracking Setup](https://placehold.co/600x350/0b0f19/f59e0b?text=GTM+%2B+GA4+Conversion+Rig) |
+| <img src="https://github.com/user-attachments/assets/cd740beb-2438-4de1-8cfc-bb9cf217190d" alt="PageSpeed 100/100 Mobile" width="100%" /> | <img src="https://github.com/user-attachments/assets/fa184080-d63c-434a-b169-4f7d985f0da8" alt="GTM and GA4 Telemetry" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/6c763acc-2fce-46f2-8ba5-e2d74fa33aa1" alt="PageSpeed 100/100 Desktop" width="100%" /> | <img width="1158" height="555" alt="Screenshot 2026-08-31 at 12 51 49" src="https://github.com/user-attachments/assets/b30bbaa8-38ea-4381-a852-4ba7f81599a7" />
 
 ---
 
@@ -57,11 +59,14 @@
 * **Zero-JS by Default:** Pre-renders clean semantic HTML5, hydrating interactive islands only when required (sub-100ms global response time).
 * **Dynamic Medical Directories:** Scalable `[slug].astro` dynamic routing architecture for ophthalmological procedures, diagnostic pricing catalogs, and clinical articles.
 * **Asset Pipeline:** Automated image optimization (next-gen WebP formatting, responsive `srcset`, CSS minification).
+  
+> [!NOTE]
+> **NO Outer Plugins Needed:** Zero third-party plugin bloat, zero security exploits, zero dependency rot.
 
-### 2. 🛒 Headless Commerce & "Store-Without-a-Store" Flow
+### 2. 🛒 Headless Commerce & Headless Backend Flow
 * **Lightweight Persistence:** Integrated with lightweight storage (Cloudflare D1 / KV / SQLite) for persistent booking requests without heavy database overhead.
-* **Frictionless Booking Engine:** Custom headless checkout/appointment flow eliminating multi-step cart friction, tailored specifically for private clinic patient conversion.
-* **Instant Telegram Bot Dispatch:** Real-time webhook delivery routing patient contact info, requested medical procedures, and complete attribution directly to doctors and clinic administration in `< 500ms`.
+* **Frictionless Booking Engine:** Custom headless checkout/appointment flow eliminating multi-step cart friction, max. conversions with min. heavy infrastructure.
+* **Instant Telegram Bot Dispatch:** Real-time webhook delivery routing patient contact info, requested medical procedures, and complete attribution directly to doctors and clinic administration in `< 500ms` via free Tg-API.
 
 ### 3. 📈 Advanced Conversion Measurement & Ads Automation
 * **Google Tag Manager (GTM) Container:** Unified telemetry script tracking click-to-call, direct messenger handoffs (Viber, Telegram), and modal submissions.
@@ -83,12 +88,12 @@
 | **Styling & UI** | **Tailwind CSS**, Semantic HTML5, Vanilla JS micro-interactions |
 | **Edge & Serverless** | **Cloudflare Pages**, **Cloudflare Workers**, **Cloudflare D1 / KV** |
 | **Automations & APIs** | **Telegram Bot API**, Webhooks, Async Lead Handlers |
-| **Growth & Analytics** | **Google Tag Manager (GTM)**, **Google Analytics 4 (GA4)**, **Google Ads AI-Powered Engine** |
+| **Growth & Analytics** | **Google Tag Manager (GTM)**, **Google Analytics 4 (GA4)**, **Google Ads PMax** |
 | **DevOps & Tooling** | Git, GitHub CI/CD, Chrome DevTools Performance Profiler |
 
 ---
 
-## 🚦 Local Development & Build
+## 🚦 To try locally:
 
 ```bash
 # Clone the repository
@@ -118,8 +123,6 @@ npm run preview
 * 💬 **Telegram:** [@Arsen_Kozaque](https://t.me/Arsen_Kozaque)
 * ✉️ **Email:** [arsenii.leno.digital@gmail.com](mailto:arsenii.leno.digital@gmail.com)
 ---
-
-## 📄 License & Intellectual Property
 
 All proprietary code, medical catalogs, branding, and assets are protected.  
 Copyright © 2026 Arsenii Leno. All rights reserved.
