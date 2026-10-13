@@ -197,6 +197,13 @@ export const appointmentSchema = z
       .int({ error: FORM_INVALID_CODE })
       .min(APPOINTMENT_MIN_SUBMIT_MS, { error: FORM_INVALID_CODE })
       .max(Number.MAX_SAFE_INTEGER, { error: FORM_INVALID_CODE }),
+    gclid: z.string().max(256).optional(),
+    utmSource: z.string().max(128).optional(),
+    utmMedium: z.string().max(128).optional(),
+    utmCampaign: z.string().max(128).optional(),
+    utmTerm: z.string().max(128).optional(),
+    utmContent: z.string().max(128).optional(),
+    pagePath: z.string().max(256).optional(),
   })
   .strict()
   .superRefine(({ website }, context) => {
@@ -208,7 +215,31 @@ export const appointmentSchema = z
       });
     }
   })
-  .transform(({ name, phone, elapsedMs }) => ({ name, phone, elapsedMs }));
+  .transform(
+    ({
+      name,
+      phone,
+      elapsedMs,
+      gclid,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      utmTerm,
+      utmContent,
+      pagePath,
+    }) => ({
+      name,
+      phone,
+      elapsedMs,
+      gclid,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      utmTerm,
+      utmContent,
+      pagePath,
+    }),
+  );
 
 export function getAppointmentFieldErrors(
   error: ZodError,

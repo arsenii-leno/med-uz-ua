@@ -31,11 +31,30 @@ function formatTelegramMessage(appointment: AppointmentInput): string {
       ? `${(appointment.elapsedMs / 1000).toFixed(1)} с`
       : "—";
 
+  const sourceLines: string[] = [];
+  if (appointment.gclid) {
+    sourceLines.push(`🎯 <b>Джерело:</b> Google Ads (Пошук)`);
+    sourceLines.push(`🔗 <b>GCLID:</b> <code>${escapeHtml(appointment.gclid.slice(0, 40))}...` + `</code>`);
+  } else if (appointment.utmSource) {
+    const med = appointment.utmMedium ? ` / ${escapeHtml(appointment.utmMedium)}` : "";
+    sourceLines.push(`🎯 <b>Джерело:</b> ${escapeHtml(appointment.utmSource)}${med}`);
+    if (appointment.utmCampaign) {
+      sourceLines.push(`📢 <b>Кампанія:</b> ${escapeHtml(appointment.utmCampaign)}`);
+    }
+  } else {
+    sourceLines.push(`🌐 <b>Джерело:</b> Прямий перехід / Органіка`);
+  }
+
+  if (appointment.pagePath) {
+    sourceLines.push(`📄 <b>Сторінка:</b> ${escapeHtml(appointment.pagePath)}`);
+  }
+
   return [
     `🏥 <b>Новий запис на прийом (med.uz.ua)</b>`,
     ``,
     `👤 <b>Пацієнт:</b> ${safeName}`,
     `📞 <b>Телефон:</b> <code>${safePhone}</code>`,
+    ...sourceLines,
     `⏱ <b>Час заповнення:</b> ${duration}`,
     `📅 <b>Дата:</b> ${new Date().toLocaleString("uk-UA", { timeZone: "Europe/Kyiv" })}`,
   ].join("\n");

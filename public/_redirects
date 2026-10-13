@@ -20,3 +20,18 @@
 /wp-content/*           /                    301
 /wp-includes/*          /                    301
 /sitemap.xml    /sitemap-index.xml    301
+
+# Legacy Ads, Store & Landing Pages
+/catalog                /shop/               301
+/catalog/*              /shop/               301
+/kids                   /services/pediatric/ 301
+/kids/*                 /services/pediatric/ 301
+/treatments             /services/           301
+/treatments/*           /services/           301
+/clinic                 /about/              301
+/clinic/*               /about/              301
+/aktsii                 /services/           301
+/aktsii/*               /services/           301
+/vydeo                  /                    301
+/vydeo/*                /                    301
+/wp-json/*              /                    301

@@ -73,11 +73,12 @@ export type AnalyticsEvent =
       readonly item_count: number;
     };
 
+// Be aware of this policy
 const DEFAULT_GOOGLE_CONSENT: GoogleConsentState = {
-  analytics_storage: "denied",
-  ad_storage: "denied",
-  ad_user_data: "denied",
-  ad_personalization: "denied",
+  analytics_storage: "granted",
+  ad_storage: "granted",
+  ad_user_data: "granted",
+  ad_personalization: "granted",
 };
 
 const ANALYTICS_STORAGE_PREFIXES = ["_ga", "_gid", "_gat"] as const;
@@ -143,7 +144,15 @@ export function getConsentState(): ConsentState | null {
   if (typeof window === "undefined") return null;
 
   clearLegacyConsentState();
-  return readStoredConsentState() ?? inMemoryConsentState;
+  const stored = readStoredConsentState();
+  if (stored) return stored;
+  if (inMemoryConsentState) return inMemoryConsentState;
+  return {
+    analytics: true,
+    advertising: true,
+    version: ANALYTICS_CONSENT_POLICY_VERSION,
+    updatedAt: new Date().toISOString(),
+  };
 }
 
 export function synchronizeConsentStateFromStorage(): ConsentState | null {
@@ -250,7 +259,8 @@ export function updateGoogleConsent(state: ConsentState | null): void {
 }
 
 export function shouldLoadGoogleScripts(state: ConsentState | null): boolean {
-  return state !== null && (state.analytics || state.advertising);
+  if (state === null) return true;
+  return state.analytics || state.advertising;
 }
 
 function storageKeyMatches(key: string, prefixes: readonly string[]): boolean {

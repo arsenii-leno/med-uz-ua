@@ -181,6 +181,13 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
 </section>
 
 <script>
+  try {
+    const initParams = new URLSearchParams(window.location.search);
+    for (const k of ["gclid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"]) {
+      const v = initParams.get(k);
+      if (v) window.sessionStorage.setItem("med_" + k, v);
+    }
+  } catch {}
   import {
     trackAppointmentError,
     trackAppointmentSuccess,
@@ -385,6 +392,28 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
     statusElement.textContent = message;
     statusElement.dataset.state = state;
     statusElement.hidden = false;
+
+    if (state === "success") {
+      statusElement.classList.add("med-form-success");
+      try {
+        const win = window as unknown as {
+          dataLayer?: unknown[];
+          gtag?: (...args: unknown[]) => void;
+        };
+        win.dataLayer ??= [];
+        win.dataLayer.push({
+          event: "lead_submit_success",
+          page_path: window.location.pathname,
+        });
+        if (typeof win.gtag === "function") {
+          win.gtag("event", "conversion", {
+            send_to: "AW-785774760/GexFCMmp9cYcEKjx1_YC",
+          });
+        }
+      } catch {}
+    } else {
+      statusElement.classList.remove("med-form-success");
+    }
   }
 
   if (
@@ -495,6 +524,24 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
         Math.round(performance.now() - initializedAt),
       );
 
+      let gclid: string | undefined;
+      let utmSource: string | undefined;
+      let utmMedium: string | undefined;
+      let utmCampaign: string | undefined;
+      let utmTerm: string | undefined;
+      let utmContent: string | undefined;
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        gclid = urlParams.get("gclid") ?? window.sessionStorage.getItem("med_gclid") ?? undefined;
+        utmSource = urlParams.get("utm_source") ?? window.sessionStorage.getItem("med_utm_source") ?? undefined;
+        utmMedium = urlParams.get("utm_medium") ?? window.sessionStorage.getItem("med_utm_medium") ?? undefined;
+        utmCampaign = urlParams.get("utm_campaign") ?? window.sessionStorage.getItem("med_utm_campaign") ?? undefined;
+        utmTerm = urlParams.get("utm_term") ?? window.sessionStorage.getItem("med_utm_term") ?? undefined;
+        utmContent = urlParams.get("utm_content") ?? window.sessionStorage.getItem("med_utm_content") ?? undefined;
+      } catch {}
+
+      const pagePath = typeof window !== "undefined" ? window.location.pathname : undefined;
+
       submitButton.disabled = true;
       submitButton.textContent = sendingMessage;
       showStatus(pendingMessage, "pending");
@@ -508,7 +555,19 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
             accept: "application/json",
             "content-type": "application/json",
           },
-          body: JSON.stringify({ name, phone, website, elapsedMs }),
+          body: JSON.stringify({
+            name,
+            phone,
+            website,
+            elapsedMs,
+            gclid,
+            utmSource,
+            utmMedium,
+            utmCampaign,
+            utmTerm,
+            utmContent,
+            pagePath,
+          }),
         });
         const responseBody: unknown = await response.json();
 
