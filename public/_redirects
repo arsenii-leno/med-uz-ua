@@ -1,26 +1,3 @@
-# Legacy Pages & Aliases
-/contact                /contacts/           301
-/contact/               /contacts/           301
-/pro-nas                /about/              301
-/pro-nas/               /about/              301
-/poslugy                /services/           301
-/poslugy/               /services/           301
-
-# Legacy WordPress Articles -> Relevant Hubs
-/tablicja-dlja-perevirki-zoru*                                     /services/           301
-/daltonizm-abo-kolorova-slipota-shcho-tse-take*                    /services/           301
-/chomu-potribno-nosyty-sontsezakhysni-okuliary-ta-iaki-pravylno-prydbaty*   /shop/      301
-/osnovni-rekomendatsii-shchodo-pravylnoho-korystuvannia-kontaktnymy-linzamy* /shop/     301
-
-# Legacy WordPress Taxonomy & Feeds -> Homepage
-/tag/*                  /                    301
-/category/*             /                    301
-/author/*               /                    301
-/feed*                  /                    301
-/wp-content/*           /                    301
-/wp-includes/*          /                    301
-/sitemap.xml    /sitemap-index.xml    301
-
 # Legacy Ads, Store & Landing Pages
 /catalog                /shop/               301
 /catalog/*              /shop/               301
@@ -34,24 +11,12 @@
 /aktsii/*               /services/           301
 /vydeo                  /                    301
 /vydeo/*                /                    301
+/oferta                 /offer/              301
+/oferta/*               /offer/              301
+/privacy-policy         /privacy/            301
+/privacy-policy/*       /privacy/            301
+/kosmetoloh             /services/           301
+/kosmetoloh/*           /services/           301
+/akne                   /services/           301
+/akne/*                 /services/           301
 /wp-json/*              /                    301
-
-# Additional Legacy WordPress Pages
-/oferta                 /offer/              301
-/oferta/*               /offer/              301
-/privacy-policy         /privacy/            301
-/privacy-policy/*       /privacy/            301
-/kosmetoloh             /services/           301
-/kosmetoloh/*           /services/           301
-/akne                   /services/           301
-/akne/*                 /services/           301
-
-# Additional Legacy WordPress Pages
-/oferta                 /offer/              301
-/oferta/*               /offer/              301
-/privacy-policy         /privacy/            301
-/privacy-policy/*       /privacy/            301
-/kosmetoloh             /services/           301
-/kosmetoloh/*           /services/           301
-/akne                   /services/           301
-/akne/*                 /services/           301
