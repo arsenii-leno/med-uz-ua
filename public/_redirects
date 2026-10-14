@@ -35,3 +35,23 @@
 /vydeo                  /                    301
 /vydeo/*                /                    301
 /wp-json/*              /                    301
+
+# Additional Legacy WordPress Pages
+/oferta                 /offer/              301
+/oferta/*               /offer/              301
+/privacy-policy         /privacy/            301
+/privacy-policy/*       /privacy/            301
+/kosmetoloh             /services/           301
+/kosmetoloh/*           /services/           301
+/akne                   /services/           301
+/akne/*                 /services/           301
+
+# Additional Legacy WordPress Pages
+/oferta                 /offer/              301
+/oferta/*               /offer/              301
+/privacy-policy         /privacy/            301
+/privacy-policy/*       /privacy/            301
+/kosmetoloh             /services/           301
+/kosmetoloh/*           /services/           301
+/akne                   /services/           301
+/akne/*                 /services/           301
