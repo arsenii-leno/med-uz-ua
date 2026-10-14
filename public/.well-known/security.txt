@@ -1,0 +1,5 @@
+Contact: mailto:lenyoarsen@gmail.com
+Expires: 2027-10-14T08:00:00.000Z
+Preferred-Languages: uk, en, sk, hu
+Canonical: https://med.uz.ua/.well-known/security.txt
+Policy: https://med.uz.ua/privacy/
