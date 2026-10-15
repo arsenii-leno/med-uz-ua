@@ -41,5 +41,16 @@ export function localizeServiceDetail(
     }
   }
 
+  if (service.slug === "programs") {
+    const spec = specs.find((s) => s.id === "programs");
+    if (spec) {
+      return {
+        ...service,
+        title: spec.title,
+        description: spec.description,
+      };
+    }
+  }
+
   return service;
 }

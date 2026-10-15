@@ -20,6 +20,7 @@ export const sk = {
   "actions.bookShort": "Objednať sa",
   "actions.bookConsultation": "Objednať konzultáciu",
   "actions.requestConsultation": "Požiadať o konzultáciu",
+  "actions.learnMore": "Zistiť viac",
   "actions.addToCart": "Pridať do košíka",
 
   "a11y.skipToContent": "Prejsť na obsah",

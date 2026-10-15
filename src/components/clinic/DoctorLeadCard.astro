@@ -17,14 +17,14 @@ const callAriaLabel = t(locale, "services.callAria", {
 ---
 
 <section
-  class="overflow-hidden rounded-2xl border border-border/80 bg-card p-6 shadow-sm transition-all sm:p-10 lg:rounded-3xl lg:p-12"
+  class="overflow-hidden rounded-2xl border border-[#f2ebd9] bg-[#FDFBF7] p-6 shadow-[0_8px_30px_rgb(243,235,217,0.35)] transition-all duration-300 hover:shadow-[0_12px_36px_rgb(243,235,217,0.5)] sm:p-10 lg:rounded-3xl lg:p-12"
   aria-labelledby="doctor-lead-heading"
   data-reveal
 >
   <div class="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
     <!-- Doctor Portrait Column -->
     <div class="relative mx-auto w-full max-w-sm lg:col-span-5 lg:max-w-none">
-      <div class="group relative overflow-hidden rounded-2xl border border-border/80 bg-muted/40 shadow-xl shadow-primary/5 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
+      <div class="group relative overflow-hidden rounded-2xl border border-[#f2ebd9] bg-[#faf6ee] shadow-xl shadow-primary/5 transition-all duration-500 hover:border-accent/40 hover:shadow-2xl hover:shadow-primary/10">
         <img
           class="aspect-[4/5] size-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           src={clinicImageAssets.doctorPortrait.src}
@@ -64,7 +64,7 @@ const callAriaLabel = t(locale, "services.callAria", {
       </p>
 
       <!-- Key Clinical Standards List -->
-      <ul class="mt-6 space-y-3 border-t border-border pt-6 text-sm text-foreground/90">
+      <ul class="mt-6 space-y-3 border-t border-[#f2ebd9] pt-6 text-sm text-foreground/90">
         <li class="flex items-center gap-3">
           <svg class="size-4.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -94,7 +94,7 @@ const callAriaLabel = t(locale, "services.callAria", {
           {t(locale, "actions.bookConsultation")}
         </a>
         <a
-          class="focus-ring-primary inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-primary/25 bg-card px-6 text-sm font-semibold text-primary transition-all duration-200 hover:border-primary hover:bg-muted"
+          class="focus-ring-primary inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#f2ebd9] bg-[#faf6ee] px-6 text-sm font-semibold text-primary transition-all duration-200 hover:border-accent/40 hover:bg-[#faf5ea] hover:shadow-sm"
           href={clinicContact.phoneHref}
           aria-label={callAriaLabel}
         >

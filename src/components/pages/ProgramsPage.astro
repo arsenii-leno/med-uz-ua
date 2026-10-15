@@ -53,7 +53,7 @@ const faqs: readonly FaqItem[] = [
   image={clinicImageAssets.doctorInCabinet.src}
 >
   <!-- Breadcrumbs -->
-  <nav class="border-b border-border bg-background" aria-label={t(locale, "breadcrumbs.label")}>
+  <nav class="border-b border-[#f2ebd9] bg-[#FDFBF7]" aria-label={t(locale, "breadcrumbs.label")}>
     <Container>
       <ol class="flex min-h-14 items-center gap-2 text-xs font-medium text-muted-foreground sm:text-sm">
         <li>
@@ -161,7 +161,7 @@ const faqs: readonly FaqItem[] = [
   </header>
 
   <!-- Indications Section (Who needs vision therapy) -->
-  <section class="bg-background py-16 sm:py-20 lg:py-28" aria-labelledby="indications-heading">
+  <section class="bg-[#FDFBF7] py-16 sm:py-20 lg:py-28" aria-labelledby="indications-heading">
     <Container>
       <div class="max-w-2xl" data-reveal>
         <span class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
@@ -174,7 +174,7 @@ const faqs: readonly FaqItem[] = [
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-2" data-reveal data-reveal-sequence>
         {indications.map((item) => (
-          <article class="flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md sm:p-8">
+          <article class="flex flex-col justify-between rounded-2xl border border-[#f2ebd9] bg-[#faf6ee] p-6 shadow-[0_4px_20px_rgb(243,235,217,0.3)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/40 hover:bg-[#faf5ea] hover:shadow-xl hover:shadow-accent/[0.04] sm:p-8">
             <div>
               <div class="flex items-center gap-2">
                 <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
@@ -196,7 +196,7 @@ const faqs: readonly FaqItem[] = [
   </section>
 
   <!-- 4-Step Course Structure -->
-  <section class="border-y border-border bg-card py-16 sm:py-20 lg:py-28" aria-labelledby="course-heading">
+  <section class="border-y border-[#f2ebd9] bg-[#faf6ee] py-16 sm:py-20 lg:py-28" aria-labelledby="course-heading">
     <Container>
       <div class="max-w-2xl" data-reveal>
         <span class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
@@ -212,7 +212,7 @@ const faqs: readonly FaqItem[] = [
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-reveal data-reveal-sequence>
         {courseSteps.map((step) => (
-          <article class="relative flex flex-col justify-between rounded-2xl border border-border/80 bg-background p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md sm:p-7">
+          <article class="relative flex flex-col justify-between rounded-2xl border border-[#f2ebd9] bg-[#FDFBF7] p-6 shadow-[0_4px_20px_rgb(243,235,217,0.3)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/40 hover:bg-[#faf5ea] hover:shadow-xl hover:shadow-accent/[0.04] sm:p-7">
             <div>
               <div class="flex items-center justify-between">
                 <span class="font-sans text-xs font-bold tabular-nums tracking-widest text-primary/70">
@@ -232,7 +232,7 @@ const faqs: readonly FaqItem[] = [
       </div>
 
       <!-- Pricing Transparency Note -->
-      <div class="mt-10 rounded-2xl border border-primary/20 bg-muted/40 p-6 text-sm leading-relaxed text-muted-foreground sm:p-8" data-reveal>
+      <div class="mt-10 rounded-2xl border border-accent/25 bg-[#FDFBF7] p-6 text-sm leading-relaxed text-muted-foreground shadow-[0_4px_20px_rgb(243,235,217,0.25)] sm:p-8" data-reveal>
         <p class="font-medium text-foreground">
           {t(locale, "programs.pricingNote")}
         </p>
@@ -241,14 +241,14 @@ const faqs: readonly FaqItem[] = [
   </section>
 
   <!-- Doctor Credibility Section -->
-  <section class="border-b border-border bg-muted/30 py-16 sm:py-20 lg:py-28" aria-label={t(locale, "about.doctorEyebrow")}>
+  <section class="border-b border-[#f2ebd9] bg-[#FDFBF7] py-16 sm:py-20 lg:py-28" aria-label={t(locale, "about.doctorEyebrow")}>
     <Container>
       <DoctorLeadCard locale={locale} approachKey="doctor.programsApproach" />
     </Container>
   </section>
 
   <!-- FAQ Section with Schema.org JSON-LD -->
-  <section class="border-b border-border bg-background py-16 sm:py-20 lg:py-28" aria-label={t(locale, "programs.faqTitle")}>
+  <section class="border-b border-[#f2ebd9] bg-[#faf6ee] py-16 sm:py-20 lg:py-28" aria-label={t(locale, "programs.faqTitle")}>
     <Container>
       <ServiceFaqAccordion
         locale={locale}
@@ -262,7 +262,7 @@ const faqs: readonly FaqItem[] = [
   <!-- Final Booking Section with Integrated AppointmentForm -->
   <section
     id="appointment"
-    class="scroll-mt-20 bg-muted/40 py-20 sm:py-24 lg:py-32"
+    class="scroll-mt-20 border-t border-[#f2ebd9] bg-[#FDFBF7] py-20 sm:py-24 lg:py-32"
     aria-labelledby="programs-booking-title"
   >
     <Container class="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
@@ -277,7 +277,7 @@ const faqs: readonly FaqItem[] = [
           {t(locale, "programs.finalIntro")}
         </p>
 
-        <div class="mt-8 border-t border-border pt-6">
+        <div class="mt-8 border-t border-[#f2ebd9] pt-6">
           <p class="text-xs uppercase tracking-wider text-muted-foreground">
             {t(locale, "contacts.telephoneLabel")}:
           </p>

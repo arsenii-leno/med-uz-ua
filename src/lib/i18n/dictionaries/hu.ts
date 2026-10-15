@@ -20,6 +20,7 @@ export const hu = {
   "actions.bookShort": "Időpontkérés",
   "actions.bookConsultation": "Konzultáció kérése",
   "actions.requestConsultation": "Konzultációt kérek",
+  "actions.learnMore": "Részletek",
   "actions.addToCart": "Kosárba",
 
   "a11y.skipToContent": "Ugrás a tartalomra",

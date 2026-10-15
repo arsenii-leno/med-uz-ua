@@ -49,7 +49,7 @@ const faqs: readonly FaqItem[] = [
   image={clinicImageAssets.pediatricExamination.src}
 >
   <!-- Breadcrumbs -->
-  <nav class="border-b border-border bg-background" aria-label={t(locale, "breadcrumbs.label")}>
+  <nav class="border-b border-[#f2ebd9] bg-[#FDFBF7]" aria-label={t(locale, "breadcrumbs.label")}>
     <Container>
       <ol class="flex min-h-14 items-center gap-2 text-xs font-medium text-muted-foreground sm:text-sm">
         <li>
@@ -140,7 +140,7 @@ const faqs: readonly FaqItem[] = [
   </header>
 
   <!-- Trust & Reassurance Cards -->
-  <section class="bg-background py-16 sm:py-20 lg:py-28" aria-labelledby="pediatric-trust-heading">
+  <section class="bg-[#FDFBF7] py-16 sm:py-20 lg:py-28" aria-labelledby="pediatric-trust-heading">
     <Container>
       <div class="max-w-2xl" data-reveal>
         <span class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
@@ -158,7 +158,7 @@ const faqs: readonly FaqItem[] = [
   </section>
 
   <!-- Pricing Section -->
-  <section class="border-y border-border bg-muted/40 py-16 sm:py-20 lg:py-28" aria-labelledby="pediatric-pricing-heading">
+  <section class="border-y border-[#f2ebd9] bg-[#faf6ee] py-16 sm:py-20 lg:py-28" aria-labelledby="pediatric-pricing-heading">
     <Container>
       <div class="max-w-2xl" data-reveal>
         <span class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
@@ -175,7 +175,7 @@ const faqs: readonly FaqItem[] = [
       <!-- Pricing Cards Grid -->
       <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
         <!-- Consultation Card -->
-        <article class="flex flex-col justify-between rounded-2xl border border-primary/20 bg-card p-6 shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:p-7">
+        <article class="flex flex-col justify-between rounded-2xl border border-accent/30 bg-[#FDFBF7] p-6 shadow-[0_4px_20px_rgb(243,235,217,0.3)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/50 hover:bg-[#faf5ea] hover:shadow-xl hover:shadow-accent/[0.04] sm:p-7">
           <div>
             <span class="text-xs font-semibold tracking-wider text-accent uppercase">
               {t(locale, "services.groupConsultations")}
@@ -184,7 +184,7 @@ const faqs: readonly FaqItem[] = [
               {t(locale, "pediatric.itemInitial")}
             </h3>
           </div>
-          <div class="mt-6 border-t border-border pt-4">
+          <div class="mt-6 border-t border-[#f2ebd9] pt-4">
             <p class="font-serif text-3xl font-semibold tabular-nums text-primary">
               {formatMedicalPrice(700, locale)}
             </p>
@@ -192,7 +192,7 @@ const faqs: readonly FaqItem[] = [
         </article>
 
         <!-- Follow-up Card -->
-        <article class="flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 shadow-sm transition-all hover:border-primary/40 hover:shadow-md sm:p-7">
+        <article class="flex flex-col justify-between rounded-2xl border border-[#f2ebd9] bg-[#FDFBF7] p-6 shadow-[0_4px_20px_rgb(243,235,217,0.3)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/40 hover:bg-[#faf5ea] hover:shadow-xl hover:shadow-accent/[0.04] sm:p-7">
           <div>
             <span class="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
               {t(locale, "services.groupConsultations")}
@@ -201,7 +201,7 @@ const faqs: readonly FaqItem[] = [
               {t(locale, "pediatric.itemFollowup")}
             </h3>
           </div>
-          <div class="mt-6 border-t border-border pt-4">
+          <div class="mt-6 border-t border-[#f2ebd9] pt-4">
             <p class="font-serif text-3xl font-semibold tabular-nums text-primary">
               {formatMedicalPrice(600, locale)}
             </p>
@@ -209,7 +209,7 @@ const faqs: readonly FaqItem[] = [
         </article>
 
         <!-- Autorefractometry Card -->
-        <article class="flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 shadow-sm transition-all hover:border-primary/40 hover:shadow-md sm:p-7">
+        <article class="flex flex-col justify-between rounded-2xl border border-[#f2ebd9] bg-[#FDFBF7] p-6 shadow-[0_4px_20px_rgb(243,235,217,0.3)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/40 hover:bg-[#faf5ea] hover:shadow-xl hover:shadow-accent/[0.04] sm:p-7">
           <div>
             <span class="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
               {t(locale, "services.groupDiagnostics")}
@@ -218,7 +218,7 @@ const faqs: readonly FaqItem[] = [
               {t(locale, "pediatric.itemAutoref")}
             </h3>
           </div>
-          <div class="mt-6 border-t border-border pt-4">
+          <div class="mt-6 border-t border-[#f2ebd9] pt-4">
             <p class="font-serif text-3xl font-semibold tabular-nums text-primary">
               {formatMedicalPrice(200, locale)}
             </p>
@@ -226,7 +226,7 @@ const faqs: readonly FaqItem[] = [
         </article>
 
         <!-- Glasses and Optical Fitting Card -->
-        <article class="flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 shadow-sm transition-all hover:border-primary/40 hover:shadow-md sm:p-7">
+        <article class="flex flex-col justify-between rounded-2xl border border-[#f2ebd9] bg-[#FDFBF7] p-6 shadow-[0_4px_20px_rgb(243,235,217,0.3)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/40 hover:bg-[#faf5ea] hover:shadow-xl hover:shadow-accent/[0.04] sm:p-7">
           <div>
             <span class="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
               {t(locale, "services.groupOptics")}
@@ -235,7 +235,7 @@ const faqs: readonly FaqItem[] = [
               {t(locale, "pediatric.itemOptics")}
             </h3>
           </div>
-          <div class="mt-6 border-t border-border pt-4">
+          <div class="mt-6 border-t border-[#f2ebd9] pt-4">
             <p class="font-serif text-2xl font-semibold tabular-nums text-primary">
               {t(locale, "adult.packagePrice").replace("700", "300")}
             </p>
@@ -244,7 +244,7 @@ const faqs: readonly FaqItem[] = [
       </div>
 
       <!-- Kindergarten / School Vision Screening Feature Box -->
-      <aside class="mt-8 overflow-hidden rounded-2xl border border-primary/20 bg-card p-6 shadow-xs sm:p-8" data-reveal>
+      <aside class="mt-8 overflow-hidden rounded-2xl border border-accent/25 bg-[#FDFBF7] p-6 shadow-[0_8px_30px_rgb(243,235,217,0.35)] sm:p-8" data-reveal>
         <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div class="max-w-2xl">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
@@ -266,7 +266,7 @@ const faqs: readonly FaqItem[] = [
               {t(locale, "pediatric.screeningPrice")}
             </span>
             <a
-              class="focus-ring-primary inline-flex min-h-12 items-center justify-center rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+              class="focus-ring-primary inline-flex min-h-12 items-center justify-center rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary/95 hover:shadow-lg active:translate-y-0"
               href={appointmentHref}
             >
               {t(locale, "actions.bookShort")}
@@ -278,14 +278,14 @@ const faqs: readonly FaqItem[] = [
   </section>
 
   <!-- Doctor Credibility Section -->
-  <section class="bg-background py-16 sm:py-20 lg:py-28" aria-label={t(locale, "about.doctorEyebrow")}>
+  <section class="bg-[#FDFBF7] py-16 sm:py-20 lg:py-28" aria-label={t(locale, "about.doctorEyebrow")}>
     <Container>
       <DoctorLeadCard locale={locale} approachKey="doctor.pediatricApproach" />
     </Container>
   </section>
 
   <!-- FAQ Section with Schema.org JSON-LD -->
-  <section class="border-t border-border bg-muted/30 py-16 sm:py-20 lg:py-28" aria-label={t(locale, "pediatric.faqTitle")}>
+  <section class="border-t border-[#f2ebd9] bg-[#faf6ee] py-16 sm:py-20 lg:py-28" aria-label={t(locale, "pediatric.faqTitle")}>
     <Container>
       <ServiceFaqAccordion
         locale={locale}
@@ -299,7 +299,7 @@ const faqs: readonly FaqItem[] = [
   <!-- Final Booking Section with Integrated AppointmentForm -->
   <section
     id="appointment"
-    class="scroll-mt-20 border-t border-border bg-background py-20 sm:py-24 lg:py-32"
+    class="scroll-mt-20 border-t border-[#f2ebd9] bg-[#FDFBF7] py-20 sm:py-24 lg:py-32"
     aria-labelledby="pediatric-booking-title"
   >
     <Container class="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
@@ -314,7 +314,7 @@ const faqs: readonly FaqItem[] = [
           {t(locale, "pediatric.finalIntro")}
         </p>
 
-        <div class="mt-8 border-t border-border pt-6">
+        <div class="mt-8 border-t border-[#f2ebd9] pt-6">
           <p class="text-xs uppercase tracking-wider text-muted-foreground">
             {t(locale, "contacts.telephoneLabel")}:
           </p>

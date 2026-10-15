@@ -18,6 +18,7 @@ export const uk = {
   "actions.bookShort": "Записатися",
   "actions.bookConsultation": "Записатися на консультацію",
   "actions.requestConsultation": "Замовити консультацію",
+  "actions.learnMore": "Детальніше",
   "actions.addToCart": "Додати до кошика",
 
   "a11y.skipToContent": "Перейти до вмісту",

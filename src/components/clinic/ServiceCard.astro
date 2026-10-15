@@ -1,7 +1,6 @@
 ---
 import type { ServiceDetail } from "../../lib/cms";
-import { defaultLocale, t, type Locale } from "../../lib/i18n";
-import { getAppointmentHref } from "../../lib/navigation";
+import { defaultLocale, localizePath, t, type Locale } from "../../lib/i18n";
 
 interface Props {
   readonly service: ServiceDetail;
@@ -17,12 +16,12 @@ const {
   class: className,
 } = Astro.props;
 
-const appointmentHref = getAppointmentHref(Astro.url.pathname, locale);
+const serviceHref = localizePath(`/services/${service.slug}`, locale);
 ---
 
 <article
   class:list={[
-    "group flex h-full flex-col bg-card p-7 transition-colors duration-300 hover:bg-muted/45 sm:p-9 lg:p-11",
+    "group relative flex h-full flex-col bg-[#FDFBF7] p-7 border border-[#f2ebd9] shadow-[0_4px_20px_rgb(243,235,217,0.25)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:border-accent/40 hover:bg-[#faf5ea]/80 hover:shadow-xl hover:shadow-accent/[0.04] sm:p-9 lg:p-11",
     className,
   ]}
 >
@@ -95,22 +94,26 @@ const appointmentHref = getAppointmentHref(Astro.url.pathname, locale);
   <!-- Нижній блок: Заголовок, опис, посилання -->
   <div class="mt-auto pt-16">
     <h3 class="max-w-lg text-3xl font-medium leading-tight tracking-tight text-card-foreground sm:text-4xl">
-      {service.title}
+      <a
+        href={serviceHref}
+        class="focus-ring-primary transition-colors hover:text-primary after:absolute after:inset-0 after:z-10"
+      >
+        {service.title}
+      </a>
     </h3>
     <p class="mt-5 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
       {service.description}
     </p>
-    <a
-      class="mt-8 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-primary underline-offset-4 hover:underline"
-      href={appointmentHref}
+    <span
+      class="mt-8 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-primary transition-all duration-300 group-hover:text-accent group-hover:translate-x-1"
+      aria-hidden="true"
     >
-      {t(locale, "actions.requestConsultation")}
+      <span>{t(locale, "actions.learnMore")}</span>
       <span
-        class="transition-transform duration-200 motion-safe:group-hover:translate-x-1"
-        aria-hidden="true"
+        class="transition-transform duration-300 motion-safe:group-hover:translate-x-1"
       >
         →
       </span>
-    </a>
+    </span>
   </div>
 </article>

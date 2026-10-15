@@ -20,6 +20,7 @@ export const en = {
   "actions.bookShort": "Book",
   "actions.bookConsultation": "Book consultation",
   "actions.requestConsultation": "Request a consultation",
+  "actions.learnMore": "Learn more",
   "actions.addToCart": "Add to cart",
 
   "a11y.skipToContent": "Skip to content",
