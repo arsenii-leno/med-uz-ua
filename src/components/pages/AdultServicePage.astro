@@ -104,9 +104,9 @@ const faqs: readonly FaqItem[] = [
               {t(locale, "adult.packagePrice")}
             </span>
           </div>
-          <h2 class="mt-3 font-serif text-xl font-medium text-primary-foreground sm:text-2xl">
+          <p class="mt-3 font-serif text-xl font-medium text-primary-foreground sm:text-2xl">
             {t(locale, "adult.packageTitle")}
-          </h2>
+          </p>
           <p class="mt-2 text-xs leading-relaxed text-primary-foreground/70 sm:text-sm">
             {t(locale, "adult.packageNote")}
           </p>
@@ -142,7 +142,7 @@ const faqs: readonly FaqItem[] = [
             src={clinicImageAssets.adultExamination.src}
             width={clinicImageAssets.adultExamination.width}
             height={clinicImageAssets.adultExamination.height}
-            alt="Діагностичний огляд пацієнта на цифровій щілинній лампі"
+            alt={t(locale, "adult.heroImageAlt")}
             loading="eager"
             decoding="async"
             sizes="(min-width: 1024px) 38vw, 100vw"
