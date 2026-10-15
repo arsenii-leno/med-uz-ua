@@ -1,0 +1,48 @@
+---
+import { defaultLocale, t, type Locale, type TranslationKey } from "../../lib/i18n";
+
+export interface TrustFeatureItem {
+  readonly titleKey: TranslationKey;
+  readonly descKey: TranslationKey;
+}
+
+interface Props {
+  readonly locale?: Locale;
+  readonly items: readonly TrustFeatureItem[];
+  readonly class?: string;
+}
+
+const {
+  locale = defaultLocale,
+  items,
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "grid gap-5 sm:grid-cols-2 lg:grid-cols-4",
+    className,
+  ]}
+  data-reveal
+  data-reveal-sequence
+>
+  {items.map((item, index) => (
+    <article class="flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md sm:p-7">
+      <div>
+        <div class="flex items-center justify-between">
+          <span class="font-sans text-xs font-bold tabular-nums tracking-widest text-primary/70">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+        </div>
+        <h3 class="mt-4 font-serif text-xl font-medium leading-snug text-foreground">
+          {t(locale, item.titleKey)}
+        </h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+          {t(locale, item.descKey)}
+        </p>
+      </div>
+    </article>
+  ))}
+</div>

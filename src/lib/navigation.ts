@@ -59,9 +59,7 @@ export function routeHasAppointmentForm(pathname: string): boolean {
 
   const serviceDetailMatch = /^\/services\/([^/]+)$/.exec(routePath);
 
-  return (
-    serviceDetailMatch !== null && serviceDetailMatch[1] !== "programs"
-  );
+  return serviceDetailMatch !== null;
 }
 
 /**

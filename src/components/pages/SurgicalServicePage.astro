@@ -1,0 +1,304 @@
+---
+import AppointmentForm from "../clinic/AppointmentForm.astro";
+import Container from "../ui/Container.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DoctorLeadCard from "../clinic/DoctorLeadCard.astro";
+import ServiceFaqAccordion, { type FaqItem } from "../clinic/ServiceFaqAccordion.astro";
+import { clinicImageAssets } from "../../lib/assets";
+import { clinicContact } from "../../lib/clinic";
+import {
+  defaultLocale,
+  localizePath,
+  t,
+  type Locale,
+} from "../../lib/i18n";
+import { getAppointmentHref } from "../../lib/navigation";
+
+interface Props {
+  readonly locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const appointmentHref = getAppointmentHref(Astro.url.pathname, locale);
+const callAriaLabel = t(locale, "services.callAria", {
+  phone: clinicContact.phoneDisplay,
+});
+
+const procedures = [
+  {
+    titleKey: "surgical.lacrimal1Title",
+    priceKey: "surgical.lacrimal1Price",
+    descKey: "surgical.lacrimal1Desc",
+  },
+  {
+    titleKey: "surgical.lacrimal2Title",
+    priceKey: "surgical.lacrimal2Price",
+    descKey: "surgical.lacrimal2Desc",
+  },
+  {
+    titleKey: "surgical.chalazionTitle",
+    priceKey: "surgical.chalazionPrice",
+    descKey: "surgical.chalazionDesc",
+  },
+  {
+    titleKey: "surgical.foreignBodyTitle",
+    priceKey: "surgical.foreignBodyPrice",
+    descKey: "surgical.foreignBodyDesc",
+  },
+] as const;
+
+const safetyPoints = [
+  "surgical.safetyPoint1",
+  "surgical.safetyPoint2",
+  "surgical.safetyPoint3",
+] as const;
+
+const faqs: readonly FaqItem[] = [
+  { qKey: "surgical.faq1Q", aKey: "surgical.faq1A" },
+  { qKey: "surgical.faq2Q", aKey: "surgical.faq2A" },
+  { qKey: "surgical.faq3Q", aKey: "surgical.faq3A" },
+  { qKey: "surgical.faq4Q", aKey: "surgical.faq4A" },
+];
+---
+
+<BaseLayout
+  title={t(locale, "seo.surgical.title")}
+  description={t(locale, "seo.surgical.description")}
+  locale={locale}
+  image={clinicImageAssets.diagnosticConsultation.src}
+>
+  <!-- Breadcrumbs -->
+  <nav class="border-b border-border bg-background" aria-label={t(locale, "breadcrumbs.label")}>
+    <Container>
+      <ol class="flex min-h-14 items-center gap-2 text-xs font-medium text-muted-foreground sm:text-sm">
+        <li>
+          <a
+            class="focus-ring-primary inline-flex min-h-11 items-center transition-colors hover:text-primary"
+            href={localizePath("/", locale)}
+          >
+            {t(locale, "breadcrumbs.home")}
+          </a>
+        </li>
+        <li aria-hidden="true" class="text-border">/</li>
+        <li>
+          <a
+            class="focus-ring-primary inline-flex min-h-11 items-center transition-colors hover:text-primary"
+            href={localizePath("/services", locale)}
+          >
+            {t(locale, "breadcrumbs.services")}
+          </a>
+        </li>
+        <li aria-hidden="true" class="text-border">/</li>
+        <li class="min-w-0">
+          <span class="block truncate text-foreground" aria-current="page">
+            {t(locale, "surgical.heroEyebrow")}
+          </span>
+        </li>
+      </ol>
+    </Container>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-primary text-primary-foreground">
+    <Container class="grid gap-12 py-16 sm:py-20 lg:grid-cols-12 lg:items-center lg:gap-16 lg:py-24">
+      <div class="min-w-0 lg:col-span-7" data-reveal>
+        <span class="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-accent">
+          <span class="size-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true"></span>
+          {t(locale, "surgical.heroEyebrow")}
+        </span>
+
+        <h1 class="mt-6 text-balance font-serif text-3xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+          {t(locale, "surgical.heroTitle")}
+        </h1>
+
+        <p class="mt-6 max-w-2xl text-base font-light leading-relaxed text-primary-foreground/80 sm:text-lg">
+          {t(locale, "surgical.heroIntro")}
+        </p>
+
+        <!-- Urgent Notice Indicator -->
+        <div class="mt-8 rounded-2xl border border-accent/30 bg-accent/10 p-5 text-accent-foreground backdrop-blur-xs sm:p-6">
+          <div class="flex items-start gap-3.5">
+            <svg class="size-6 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-accent">
+                {t(locale, "surgical.urgentWarningTitle")}
+              </p>
+              <p class="mt-1.5 text-xs leading-relaxed text-primary-foreground/85 sm:text-sm">
+                {t(locale, "surgical.urgentWarningDesc")}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="mt-8 flex flex-col gap-3.5 sm:flex-row sm:flex-wrap sm:items-center">
+          <a
+            class="focus-ring-primary inline-flex min-h-13 items-center justify-center rounded-xl bg-accent px-7 text-sm font-semibold text-primary shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-accent/90 hover:shadow-lg active:translate-y-0"
+            href={appointmentHref}
+          >
+            {t(locale, "actions.bookConsultation")}
+          </a>
+
+          <a
+            class="focus-ring-primary inline-flex min-h-13 items-center justify-center gap-2 rounded-xl border border-primary-foreground/30 px-6 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:border-primary-foreground hover:bg-primary-foreground/10 active:translate-y-0"
+            href={clinicContact.phoneHref}
+            aria-label={callAriaLabel}
+          >
+            <svg class="size-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+            </svg>
+            <span>{clinicContact.phoneDisplay}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Equipment Photography Column -->
+      <div class="relative min-w-0 lg:col-span-5" data-reveal>
+        <figure class="group relative overflow-hidden rounded-2xl border border-primary-foreground/20 bg-muted/40 shadow-2xl transition-all duration-500 hover:shadow-primary/20 lg:rounded-3xl">
+          <img
+            class="aspect-[3/4] size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            src={clinicImageAssets.diagnosticConsultation.src}
+            width={clinicImageAssets.diagnosticConsultation.width}
+            height={clinicImageAssets.diagnosticConsultation.height}
+            alt="Офтальмологічне діагностичне та маніпуляційне обладнання клініки"
+            loading="eager"
+            decoding="async"
+            sizes="(min-width: 1024px) 38vw, 100vw"
+          />
+          <figcaption class="absolute bottom-0 inset-x-0 bg-primary/90 p-4 text-xs tracking-wider uppercase text-primary-foreground/80 backdrop-blur-sm">
+            {clinicContact.city} · {clinicContact.streetAddress}
+          </figcaption>
+        </figure>
+      </div>
+    </Container>
+  </header>
+
+  <!-- Procedures List & Pricing -->
+  <section class="bg-background py-16 sm:py-20 lg:py-28" aria-labelledby="procedures-heading">
+    <Container>
+      <div class="max-w-2xl" data-reveal>
+        <span class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          {t(locale, "surgical.proceduresEyebrow")}
+        </span>
+        <h2 id="procedures-heading" class="mt-3 font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
+          {t(locale, "surgical.proceduresTitle")}
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {t(locale, "surgical.proceduresIntro")}
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-2" data-reveal data-reveal-sequence>
+        {procedures.map((proc) => (
+          <article class="flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md sm:p-8">
+            <div>
+              <div class="flex flex-wrap items-baseline justify-between gap-3">
+                <span class="size-2 rounded-full bg-accent" aria-hidden="true"></span>
+                <span class="font-serif text-2xl font-bold tabular-nums text-primary">
+                  {t(locale, proc.priceKey)}
+                </span>
+              </div>
+              <h3 class="mt-4 font-serif text-xl font-medium leading-snug text-foreground sm:text-2xl">
+                {t(locale, proc.titleKey)}
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                {t(locale, proc.descKey)}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Clinical Safety & Protocol Section -->
+  <section class="border-y border-border bg-card py-16 sm:py-20" aria-labelledby="safety-heading">
+    <Container>
+      <div class="mx-auto max-w-4xl" data-reveal>
+        <div class="text-center">
+          <span class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+            {t(locale, "surgical.safetyEyebrow")}
+          </span>
+          <h2 id="safety-heading" class="mt-3 font-serif text-3xl font-medium text-foreground sm:text-4xl">
+            {t(locale, "surgical.safetyTitle")}
+          </h2>
+        </div>
+
+        <div class="mt-10 grid gap-6 sm:grid-cols-3">
+          {safetyPoints.map((pointKey, idx) => (
+            <div class="rounded-2xl border border-border/80 bg-background p-6 shadow-xs">
+              <span class="flex size-9 items-center justify-center rounded-xl bg-primary/10 font-sans text-sm font-bold text-primary">
+                0{idx + 1}
+              </span>
+              <p class="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {t(locale, pointKey)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Doctor Credibility Section -->
+  <section class="border-b border-border bg-muted/30 py-16 sm:py-20 lg:py-28" aria-label={t(locale, "about.doctorEyebrow")}>
+    <Container>
+      <DoctorLeadCard locale={locale} approachKey="doctor.surgicalApproach" />
+    </Container>
+  </section>
+
+  <!-- FAQ Section with Schema.org JSON-LD -->
+  <section class="border-b border-border bg-background py-16 sm:py-20 lg:py-28" aria-label={t(locale, "surgical.faqTitle")}>
+    <Container>
+      <ServiceFaqAccordion
+        locale={locale}
+        eyebrowKey="surgical.faqEyebrow"
+        titleKey="surgical.faqTitle"
+        faqs={faqs}
+      />
+    </Container>
+  </section>
+
+  <!-- Final Booking Section with Integrated AppointmentForm -->
+  <section
+    id="appointment"
+    class="scroll-mt-20 bg-muted/40 py-20 sm:py-24 lg:py-32"
+    aria-labelledby="surgical-booking-title"
+  >
+    <Container class="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+      <div class="min-w-0 lg:col-span-5 lg:pt-8" data-reveal>
+        <span class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+          {t(locale, "surgical.finalEyebrow")}
+        </span>
+        <h2 id="surgical-booking-title" class="mt-4 font-serif text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          {t(locale, "surgical.finalTitle")}
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-muted-foreground">
+          {t(locale, "surgical.finalIntro")}
+        </p>
+
+        <div class="mt-8 border-t border-border pt-6">
+          <p class="text-xs uppercase tracking-wider text-muted-foreground">
+            {t(locale, "contacts.telephoneLabel")}:
+          </p>
+          <a
+            class="mt-2 inline-flex items-center gap-2 font-serif text-xl font-semibold text-primary transition-colors hover:text-accent sm:text-2xl"
+            href={clinicContact.phoneHref}
+            aria-label={callAriaLabel}
+          >
+            <svg class="size-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+            </svg>
+            <span>{clinicContact.phoneDisplay}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="min-w-0 lg:col-span-7 xl:pl-8">
+        <AppointmentForm locale={locale} />
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

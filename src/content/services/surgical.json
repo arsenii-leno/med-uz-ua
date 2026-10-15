@@ -1,14 +1,15 @@
 {
-  "title": "Surgical Support",
-  "description": "Discussion of diagnostic findings and next steps, including referral when appropriate. This does not state that surgery is performed at the clinic.",
+  "title": "Outpatient Procedures",
+  "description": "Minor outpatient ophthalmic procedures under local anesthesia: lacrimal duct probing, chalazion anti-inflammatory injections, and foreign body removal.",
   "category": "adult",
-  "heroTagline": "Professional guidance and diagnostic evaluation for surgical pathways.",
+  "heroTagline": "Safe, gentle outpatient ophthalmic procedures and clinical care pathways.",
   "keyBenefits": [
-    "Detailed diagnostic evaluation",
-    "Discussion of treatment pathways",
-    "Referral coordination when appropriate"
+    "Lacrimal duct probing and clearance",
+    "Anti-inflammatory chalazion injections",
+    "Microscopic foreign body removal from cornea or conjunctiva",
+    "Referral coordination for advanced ophthalmic surgery"
   ],
   "status": "active",
-  "metaTitle": "Surgical Support | Med.uz.ua",
-  "metaDescription": "Surgical pathway support and diagnostic consultation at European Ophthalmological Clinic."
+  "metaTitle": "Outpatient Ophthalmic Procedures in Uzhhorod | Med.uz.ua",
+  "metaDescription": "Minor ophthalmic outpatient procedures in Uzhhorod: foreign body removal, chalazion treatment, and lacrimal duct probing under local anesthesia."
 }

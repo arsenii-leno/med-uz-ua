@@ -1,14 +1,15 @@
 {
   "title": "Adult Ophthalmology",
-  "description": "Examination and selected diagnostic procedures; the appropriate scope is determined during consultation.",
+  "description": "Comprehensive digital eye examination, early glaucoma and cataract screening, and precise optical prescriptions in Uzhhorod.",
   "category": "adult",
-  "heroTagline": "Focused examination and diagnostic procedures for adult patients.",
+  "heroTagline": "Advanced computer diagnostics and personalized vision care for adults.",
   "keyBenefits": [
-    "Comprehensive eye examination",
-    "Slit-lamp biomicroscopy",
-    "Individual vision correction plan"
+    "Computerized autorefractometry and corneal evaluation",
+    "Digital slit-lamp biomicroscopy",
+    "Non-contact intraocular pressure tonometry",
+    "Detailed fundus examination and bespoke lens fitting"
   ],
   "status": "active",
-  "metaTitle": "Adult Ophthalmology | Med.uz.ua",
-  "metaDescription": "Adult ophthalmology and diagnostic procedures at European Ophthalmological Clinic in Uzhhorod."
+  "metaTitle": "Adult Eye Diagnostics in Uzhhorod | Med.uz.ua",
+  "metaDescription": "Comprehensive adult eye examinations and digital diagnostics in Uzhhorod at European Ophthalmological Clinic. Early detection of glaucoma and cataract."
 }
