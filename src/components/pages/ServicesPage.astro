@@ -421,6 +421,7 @@ const physicianCopy = physicianCollageCopy[locale];
           <a
             class="focus-ring-primary inline-flex min-h-12 items-center justify-center rounded-xl border border-[#f2ebd9] bg-[#FDFBF7] px-6 text-sm font-semibold text-primary transition-all duration-200 hover:border-accent/40 hover:bg-[#faf5ea]"
             href={clinicContact.phoneHref}
+            data-tracking-location="services_hero"
             aria-label={callAriaLabel}
           >
             {clinicContact.phoneDisplay}
@@ -680,6 +681,7 @@ const physicianCopy = physicianCollageCopy[locale];
         <a
           class="inline-flex min-h-12 items-center justify-center border border-primary-foreground/45 px-6 text-sm font-semibold text-primary-foreground transition-colors hover:border-accent hover:text-accent"
           href={clinicContact.phoneHref}
+          data-tracking-location="services_cta"
           aria-label={callAriaLabel}
         >
           {t(locale, "services.call")}

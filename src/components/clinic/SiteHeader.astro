@@ -144,6 +144,7 @@ const initialCartLabel = t(locale, "a11y.openCartMany").replace(
       <a
         class="focus-ring-primary hidden size-12 2xl:size-[3.25rem] shrink-0 items-center justify-center rounded-xl border border-border/80 bg-card text-primary shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-md active:translate-y-0 xl:inline-flex"
         href={clinicContact.phoneHref}
+        data-tracking-location="header_desktop"
         aria-label={t(locale, "a11y.callClinic", { phone: clinicContact.phoneDisplay })}
         title={clinicContact.phoneDisplay}
       >
@@ -323,6 +324,7 @@ const initialCartLabel = t(locale, "a11y.openCartMany").replace(
         <a
           class="flex min-h-12 items-center justify-center gap-2.5 rounded-xl border border-white/20 px-4 text-center text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
           href={clinicContact.phoneHref}
+          data-tracking-location="header_mobile_drawer"
           data-drawer-link
         >
           <svg class="size-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

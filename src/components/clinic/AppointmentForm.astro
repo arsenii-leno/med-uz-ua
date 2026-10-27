@@ -8,9 +8,10 @@ import type { AppointmentFieldErrorCode } from "../../schemas/appointment";
 
 interface Props {
   locale?: Locale;
+  serviceType?: string;
 }
 
-const { locale = defaultLocale } = Astro.props;
+const { locale = defaultLocale, serviceType = "general" } = Astro.props;
 
 const fieldErrorMessagesByLocale: Record<
   Locale,
@@ -87,6 +88,7 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
     data-success-message={t(locale, "appointment.success")}
     data-request-error-message={t(locale, "appointment.errorRequest")}
     data-field-error-messages={JSON.stringify(fieldErrorMessages)}
+    data-service-type={serviceType}
   >
     <div
       class="pointer-events-none absolute -left-[10000px] h-px w-px overflow-hidden opacity-0"
@@ -183,14 +185,22 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
 <script>
   try {
     const initParams = new URLSearchParams(window.location.search);
-    for (const k of ["gclid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"]) {
+    for (const k of [
+      "gclid",
+      "gbraid",
+      "wbraid",
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+    ]) {
       const v = initParams.get(k);
       if (v) window.sessionStorage.setItem("med_" + k, v);
     }
   } catch {}
   import {
     trackAppointmentError,
-    trackAppointmentSuccess,
   } from "../../lib/analytics";
 
   const FIELD_ERROR_CODES = [
@@ -395,22 +405,6 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
 
     if (state === "success") {
       statusElement.classList.add("med-form-success");
-      try {
-        const win = window as unknown as {
-          dataLayer?: unknown[];
-          gtag?: (...args: unknown[]) => void;
-        };
-        win.dataLayer ??= [];
-        win.dataLayer.push({
-          event: "lead_submit_success",
-          page_path: window.location.pathname,
-        });
-        if (typeof win.gtag === "function") {
-          win.gtag("event", "conversion", {
-            send_to: "AW-785774760/GexFCMmp9cYcEKjx1_YC",
-          });
-        }
-      } catch {}
     } else {
       statusElement.classList.remove("med-form-success");
     }
@@ -525,6 +519,8 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
       );
 
       let gclid: string | undefined;
+      let gbraid: string | undefined;
+      let wbraid: string | undefined;
       let utmSource: string | undefined;
       let utmMedium: string | undefined;
       let utmCampaign: string | undefined;
@@ -533,6 +529,8 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
       try {
         const urlParams = new URLSearchParams(window.location.search);
         gclid = urlParams.get("gclid") ?? window.sessionStorage.getItem("med_gclid") ?? undefined;
+        gbraid = urlParams.get("gbraid") ?? window.sessionStorage.getItem("med_gbraid") ?? undefined;
+        wbraid = urlParams.get("wbraid") ?? window.sessionStorage.getItem("med_wbraid") ?? undefined;
         utmSource = urlParams.get("utm_source") ?? window.sessionStorage.getItem("med_utm_source") ?? undefined;
         utmMedium = urlParams.get("utm_medium") ?? window.sessionStorage.getItem("med_utm_medium") ?? undefined;
         utmCampaign = urlParams.get("utm_campaign") ?? window.sessionStorage.getItem("med_utm_campaign") ?? undefined;
@@ -561,6 +559,8 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
             website,
             elapsedMs,
             gclid,
+            gbraid,
+            wbraid,
             utmSource,
             utmMedium,
             utmCampaign,
@@ -576,7 +576,48 @@ const fieldErrorMessages = fieldErrorMessagesByLocale[locale];
           clearAllFieldErrors();
           initializedAt = performance.now();
           showStatus(successMessage, "success");
-          trackAppointmentSuccess();
+
+          const detectedService =
+            form.dataset.serviceType ||
+            (window.location.pathname.includes("/pediatric")
+              ? "pediatric"
+              : window.location.pathname.includes("/adult")
+                ? "adult"
+                : window.location.pathname.includes("/surgical")
+                  ? "surgical"
+                  : window.location.pathname.includes("/programs")
+                    ? "programs"
+                    : "general");
+
+          // Clean GTM event
+          const win = window as unknown as { dataLayer?: unknown[] };
+          win.dataLayer ??= [];
+          win.dataLayer.push({
+            event: "appointment_form_success",
+            form_id: "appointment_form",
+            form_name: "consultation_request",
+            service_type: detectedService,
+            page_location: window.location.href,
+          });
+
+          // WordPress CF7 compatibility
+          win.dataLayer.push({
+            event: "wpcf7mailsent",
+            form_id: "appointment_form",
+          });
+
+          try {
+            document.dispatchEvent(
+              new CustomEvent("wpcf7mailsent", {
+                bubbles: true,
+                detail: {
+                  status: "mail_sent",
+                  form_id: "appointment_form",
+                },
+              }),
+            );
+          } catch {}
+
           return;
         }
 

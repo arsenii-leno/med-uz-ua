@@ -163,9 +163,68 @@ const structuredData = {
     <!-- Schema.org Knowledge Graph -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
+    <!-- Attribution Capture & Google Consent Mode v2 (Must execute before GTM loads) -->
+    <script is:inline>
+      (function() {
+        // 1. Capture ad identifiers & UTM parameters from URL into sessionStorage immediately
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var keys = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+          for (var i = 0; i < keys.length; i++) {
+            var val = params.get(keys[i]);
+            if (val) {
+              window.sessionStorage.setItem('med_' + keys[i], val);
+            }
+          }
+        } catch (e) {}
+
+        // 2. Initialize dataLayer and global gtag function
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { window.dataLayer.push(arguments); }
+        window.gtag = gtag;
+
+        // 3. Google Consent Mode v2: initialize defaults
+        var consentKey = 'meduzua:analytics-consent:v2';
+        var stored = null;
+        try {
+          var raw = window.localStorage.getItem(consentKey);
+          if (raw) stored = JSON.parse(raw);
+        } catch (e) {}
+
+        var defaultConsent = {
+          'analytics_storage': 'granted',
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        };
+
+        if (stored && stored.version === 2) {
+          defaultConsent.analytics_storage = stored.analytics ? 'granted' : 'denied';
+          defaultConsent.ad_storage = stored.advertising ? 'granted' : 'denied';
+          defaultConsent.ad_user_data = stored.advertising ? 'granted' : 'denied';
+          defaultConsent.ad_personalization = stored.advertising ? 'granted' : 'denied';
+        }
+
+        gtag('consent', 'default', defaultConsent);
+      })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-K96GCCJ5');
+    </script>
+    <!-- End Google Tag Manager -->
+
     <slot name="head" />
   </head>
   <body class="min-h-screen">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K96GCCJ5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-xl focus:outline-none"
       href="#main-content"

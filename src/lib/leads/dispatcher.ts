@@ -33,8 +33,14 @@ function formatTelegramMessage(appointment: AppointmentInput): string {
 
   const sourceLines: string[] = [];
   if (appointment.gclid) {
-    sourceLines.push(`🎯 <b>Джерело:</b> Google Ads (Пошук)`);
+    sourceLines.push(`🎯 <b>Джерело:</b> Google Ads (GCLID)`);
     sourceLines.push(`🔗 <b>GCLID:</b> <code>${escapeHtml(appointment.gclid.slice(0, 40))}...` + `</code>`);
+  } else if (appointment.gbraid) {
+    sourceLines.push(`🎯 <b>Джерело:</b> Google Ads (iOS / GBRAID)`);
+    sourceLines.push(`🔗 <b>GBRAID:</b> <code>${escapeHtml(appointment.gbraid.slice(0, 40))}...` + `</code>`);
+  } else if (appointment.wbraid) {
+    sourceLines.push(`🎯 <b>Джерело:</b> Google Ads (Web / WBRAID)`);
+    sourceLines.push(`🔗 <b>WBRAID:</b> <code>${escapeHtml(appointment.wbraid.slice(0, 40))}...` + `</code>`);
   } else if (appointment.utmSource) {
     const med = appointment.utmMedium ? ` / ${escapeHtml(appointment.utmMedium)}` : "";
     sourceLines.push(`🎯 <b>Джерело:</b> ${escapeHtml(appointment.utmSource)}${med}`);

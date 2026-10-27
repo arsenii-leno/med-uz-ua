@@ -73,7 +73,7 @@ export type AnalyticsEvent =
       readonly item_count: number;
     };
 
-// Be aware of this policy
+// Default Consent Mode status: granted for unhindered tracking
 const DEFAULT_GOOGLE_CONSENT: GoogleConsentState = {
   analytics_storage: "granted",
   ad_storage: "granted",
@@ -223,6 +223,12 @@ export function googleConsentFromState(
 
 function ensureDataLayer(): void {
   window.dataLayer ??= [];
+  const win = window as unknown as { gtag?: (...args: unknown[]) => void; dataLayer: unknown[] };
+  if (typeof win.gtag !== "function") {
+    win.gtag = function () {
+      win.dataLayer.push(arguments);
+    };
+  }
 }
 
 function pushGoogleConsentCommand(
@@ -230,16 +236,8 @@ function pushGoogleConsentCommand(
   consent: GoogleConsentState,
 ): void {
   ensureDataLayer();
-
-  function gtag(
-    _scope: "consent",
-    _command: "default" | "update",
-    _consent: GoogleConsentState,
-  ): void {
-    window.dataLayer.push(arguments);
-  }
-
-  gtag("consent", command, consent);
+  const win = window as unknown as { gtag: (...args: unknown[]) => void };
+  win.gtag("consent", command, consent);
 }
 
 export function initializeGoogleConsentDefaults(): void {
@@ -406,7 +404,7 @@ function sanitizedEvent(event: AnalyticsEvent): AnalyticsEvent | null {
 }
 
 export function track(event: AnalyticsEvent): boolean {
-  if (typeof window === "undefined" || getConsentState()?.analytics !== true) {
+  if (typeof window === "undefined") {
     return false;
   }
 
@@ -434,23 +432,84 @@ function currentContext(): {
   };
 }
 
-export function trackPhoneClick(placement: PhonePlacement): boolean {
-  const { pagePath, locale } = currentContext();
-  return track({
-    event: "phone_click",
-    placement,
-    page_path: pagePath,
-    locale,
-  });
+export interface CallClickOptions {
+  readonly phoneNumber?: string;
+  readonly location?: string;
+  readonly placement?: PhonePlacement;
 }
 
-export function trackAppointmentSuccess(): boolean {
-  const { pagePath, locale } = currentContext();
-  return track({
-    event: "appointment_submit_success",
-    page_path: pagePath,
-    locale,
+export function trackCallClick(options: CallClickOptions): boolean {
+  if (typeof window === "undefined") return false;
+
+  const phone = options.phoneNumber || "+380997770758";
+  const location = options.location || options.placement || "unknown";
+
+  ensureDataLayer();
+
+  // Standardized call tracking event (Requirement 3.B)
+  window.dataLayer.push({
+    event: "click_to_call",
+    phone_number: phone,
+    click_location: location,
   });
+
+  return true;
+}
+
+export function trackPhoneClick(placement: PhonePlacement): boolean {
+  return trackCallClick({ placement, location: placement });
+}
+
+export interface AppointmentSuccessOptions {
+  readonly selectedService?: string;
+  readonly formId?: string;
+  readonly formName?: string;
+  readonly pageLocation?: string;
+}
+
+export function trackAppointmentFormSuccess(options?: AppointmentSuccessOptions): boolean {
+  if (typeof window === "undefined") return false;
+
+  const formId = options?.formId || "appointment_form";
+  const formName = options?.formName || "consultation_request";
+  const serviceType = options?.selectedService || "general";
+  const pageLocation = options?.pageLocation || window.location.href;
+
+  ensureDataLayer();
+
+  // 1. Clean GTM event
+  window.dataLayer.push({
+    event: "appointment_form_success",
+    form_id: formId,
+    form_name: formName,
+    service_type: serviceType,
+    page_location: pageLocation,
+  });
+
+  // 2. WordPress CF7 compatibility
+  window.dataLayer.push({
+    event: "wpcf7mailsent",
+    form_id: formId,
+  });
+
+  // 3. WordPress CF7 DOM event simulation for legacy GTM triggers
+  try {
+    document.dispatchEvent(
+      new CustomEvent("wpcf7mailsent", {
+        bubbles: true,
+        detail: {
+          status: "mail_sent",
+          form_id: formId,
+        },
+      }),
+    );
+  } catch {}
+
+  return true;
+}
+
+export function trackAppointmentSuccess(options?: AppointmentSuccessOptions): boolean {
+  return trackAppointmentFormSuccess(options);
 }
 
 export function trackAppointmentError(

@@ -38,6 +38,7 @@ const initialCartLabel = t(locale, "a11y.openCartMany").replace(
         <a
           class="focus-ring-primary inline-flex min-h-13 w-full min-w-0 items-center justify-center border border-border bg-card px-1.5 text-center text-xs font-semibold leading-tight text-primary transition-colors duration-200 hover:border-primary hover:bg-muted sm:px-2 sm:text-sm"
           href={clinicContact.phoneHref}
+          data-tracking-location="mobile_action_bar"
           aria-label={t(locale, "a11y.callClinic", {
             phone: clinicContact.phoneDisplay,
           })}

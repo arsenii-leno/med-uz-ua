@@ -198,7 +198,7 @@ const localized = copy[locale];
     initializeGoogleConsentDefaults,
     setConsentPreferences,
     synchronizeConsentStateFromStorage,
-    trackPhoneClick,
+    trackCallClick,
     updateGoogleConsent,
     type ConsentPreferences,
     type ConsentState,
@@ -262,13 +262,24 @@ const localized = copy[locale];
         updateGoogleConsent(this.#state);
       }
 
+      const triggerGtm = (): void => {
+        this.#loadGtm();
+        window.removeEventListener("scroll", triggerGtm);
+        window.removeEventListener("touchstart", triggerGtm);
+        window.removeEventListener("click", triggerGtm);
+      };
+
+      window.addEventListener("scroll", triggerGtm, { passive: true, once: true });
+      window.addEventListener("touchstart", triggerGtm, { passive: true, once: true });
+      window.addEventListener("click", triggerGtm, { passive: true, once: true });
+
       if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(() => this.#loadGtm(), { timeout: 2500 });
+        window.requestIdleCallback(() => this.#loadGtm(), { timeout: 1000 });
       } else {
-        setTimeout(() => this.#loadGtm(), 1500);
+        setTimeout(() => this.#loadGtm(), 800);
       }
 
-      panel.hidden = this.#state !== null || !this.#loaderEnabled;
+      panel.hidden = true;
     }
 
     disconnectedCallback(): void {
@@ -325,7 +336,20 @@ const localized = copy[locale];
 
       const phoneLink = target.closest('a[href^="tel:"]');
       if (phoneLink instanceof HTMLAnchorElement) {
-        trackPhoneClick(phonePlacement(phoneLink));
+        const rawHref = phoneLink.getAttribute("href") || "";
+        const phoneNumber =
+          rawHref.replace(/^tel:/i, "").trim() || "+380997770758";
+        const placement = phonePlacement(phoneLink);
+        const trackingLocation =
+          phoneLink.getAttribute("data-tracking-location") ||
+          placement ||
+          "unknown";
+
+        trackCallClick({
+          phoneNumber,
+          location: trackingLocation,
+          placement,
+        });
       }
     };
 
@@ -343,7 +367,7 @@ const localized = copy[locale];
       this.#clearRevokedStorage(previous, this.#state);
       this.#syncControls();
       if (this.#panel) {
-        this.#panel.hidden = this.#state !== null || !this.#loaderEnabled;
+        this.#panel.hidden = true;
       }
     };
 
